@@ -25,16 +25,26 @@ public class Worker : IHostedService
         
         foreach (var service in services)
         {
-            var packages = await _packageService.GetPackagesAsync(service, stoppingToken);
+            Dictionary<string, string> packages = new Dictionary<string, string>();
+            try
+            {
+                packages = await _packageService.GetPackagesAsync(service, stoppingToken);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Error getting packages from {service}");
+                continue;
+            }
             if (!packages.ContainsKey(requestedPackage))
             {
                 _logger.LogError("Service {service} does not contain package {package}", service, requestedPackage);
-                return;
+                continue;
             }
 
             if (packages.TryGetValue(requestedPackage, out var version) && version != requestedVersion)
             {
                 _logger.LogError("Service {service} does not contain package {package}  with version {version}", service, requestedPackage,requestedVersion);
+                continue;
             }
             
             _logger.LogInformation("Service {service} contains package {package} with version {version}", service, requestedPackage, requestedVersion);
