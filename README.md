@@ -1,6 +1,8 @@
 Сервис павтоматизации роверки пакетов в сервисах
 
-Для запускаg проекта необходимо выполнить команду `PackageVersionValidator.dll <package name> <package version>`
+Для запускаg проекта необходимо выполнить команду 
+* если проект собран`PackageVersionValidator.dll <package name> <package version>`
+* в других случаях `dotnet run <package name> <package version>`
 
 Где <package name> - название библиотеки, <package version> - версия библиотеки
 
