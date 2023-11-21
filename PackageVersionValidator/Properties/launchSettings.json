@@ -1,0 +1,12 @@
+﻿{
+  "profiles": {
+    "PackageVersionValidator": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      },
+      "commandLineArgs": "ingos.test.package 1.0.1"
+    }
+  }
+}
